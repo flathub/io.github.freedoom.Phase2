@@ -39,6 +39,10 @@ modules:
   - type: archive
     url: https://github.com/freedoom/freedoom/releases/download/v0.12.1/freedoom-0.12.1.zip
     sha256: f42c6810fc89b0282de1466c2c9c7c9818031a8d556256a6db1b69f6a77b5806
+    x-checker-data:
+      type: anitya
+      project-id: 843
+      url-template: https://github.com/freedoom/freedoom/releases/download/v$version/freedoom-$version.zip
   - type: file
     url: https://raw.githubusercontent.com/freedoom/freedoom/v0.12.1/dist/io.github.freedoom.Phase2.desktop
     sha256: d5a06c224b5b65f07b1c7e918d4da1937d84eafe60853f2a75ebfad5f3f117fb
