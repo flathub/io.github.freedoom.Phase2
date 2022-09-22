@@ -29,8 +29,6 @@ cleanup:
 
 modules:
 
-  - shared-modules/linux-audio/libinstpatch.json
-  - shared-modules/linux-audio/fluidsynth2.json
   - shared-modules/gzdoom/gzdoom.json
 
   - name: freedoom2
