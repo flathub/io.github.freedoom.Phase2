@@ -42,9 +42,10 @@ modules:
           project-id: 843
           url-template: https://github.com/freedoom/freedoom/releases/download/v$version/freedoom-$version.zip
       - type: file
-        url: https://raw.githubusercontent.com/freedoom/freedoom/v0.12.1/dist/io.github.freedoom.Phase2.desktop
-        sha256: d5a06c224b5b65f07b1c7e918d4da1937d84eafe60853f2a75ebfad5f3f117fb
-        # Temporary version until the mebp issue is resolved
+        url: https://raw.githubusercontent.com/freedoom/freedoom/v0.13.0/dist/io.github.freedoom.Phase2.desktop
+        sha256: df32996518eca95873b0bf2b4159c7a4f39a9c50f9d13ba3bdb6d28a37d37fed
+        # Temporary version until screenshots-missing issue is fixed upstream
+        # https://github.com/freedoom/freedoom/issues/1305
       - type: file
         path: io.github.freedoom.Phase2.metainfo.xml
       - type: file
