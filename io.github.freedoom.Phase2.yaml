@@ -55,7 +55,7 @@ modules:
         path: heada1-128x128.png
       - type: script
         commands:
-          - gzdoom +fluid_patchset /app/share/sounds/sf2/gzdoom.sf2 -file lights.pk3
+          - gzdoom +fluid_patchset /app/share/games/doom/soundfonts/gzdoom.sf2 -file lights.pk3
             brightmaps.pk3 "$@"
         dest-filename: gzdoom.sh
     build-commands:
