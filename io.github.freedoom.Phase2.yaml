@@ -4,9 +4,14 @@ sdk: org.freedesktop.Sdk
 runtime-version: '23.08'
 command: gzdoom.sh
 
-# Desktop file icons are not named according to standard
+# Desktop file icons are not named according to standard, so we change them with this shortcut
+# There are a few other 'rename'-shortcuts for files who are not named to according to the latest standard.
+# For 10 years, freedoom2.desktop would have been good enough. Only in the past 5 years are we moving towards io.github.freedoom.Phase2.desktop
 rename-icon: freedoom2
 
+# This is where the permissions are defined for a Flatpak. 
+# Freedoom gets access to accelerated graphics, audio, and we also make sure that GZDoom doesn't crash by shimming a folder
+# Permissions are opt-in, so any permission not listed here is not given
 finish-args:
   - --device=dri
   - --socket=wayland
@@ -21,22 +26,34 @@ finish-args:
   # Simpler way of preventing KDE related errors
   - --env=KDE_FULL_SESSION=false
 
+# Here we clean up some data that we don't need to distribute. Mostly build-artefacts
 cleanup:
   - /app/include
   - /app/lib/*.a
   - /app/lib/*.la
   - /app/lib/pkgconfig
 
+# Modules are all the build-stages that happen, before a Flatpak is completed
 modules:
 
+  # A shared module for GZDoom. Since I package GZDoom multiple times, I have stored that work in a git submodule that is shared amongst many projects
   - shared-modules/gzdoom/gzdoom.json
 
+  # The stage where I package Phase 2
+  # before we start, I say that it's a 'simple' build process i.e. no Make or Meson required. 
+  # Most software is build with special build tools, but we don't need those here
   - name: freedoom2
     buildsystem: simple
+    # Then the downloading starts
+    # First, I download the zip containing the .wad file and the ./dist/ files that I need
+    # Second, I select some images that are stored in this git-project who will be used as desktop icons
+    # Finally, I create a small one-line script called gzdoom.sh that ensures that GZDoom starts with the right soundfont
     sources:
       - type: archive
         url: https://github.com/freedoom/freedoom/releases/download/v0.13.0/freedoom-0.13.0.zip
         sha256: 3f9b264f3e3ce503b4fb7f6bdcb1f419d93c7b546f4df3e874dd878db9688f59
+        # This is part of our automated updating system. 
+        # If you make a release, Flathub will automatically create a new pull-request with the update
         x-checker-data:
           type: anitya
           project-id: 843
@@ -58,9 +75,11 @@ modules:
           - gzdoom +fluid_patchset /app/share/games/doom/soundfonts/gzdoom.sf2 -file lights.pk3
             brightmaps.pk3 "$@"
         dest-filename: gzdoom.sh
+    # Here i add all the files to the /app/ directory, which is where we create the Flatpak
     build-commands:
       - install -D gzdoom.sh /app/bin/gzdoom.sh
       - install -Dm 644 freedoom2.wad /app/share/games/doom
+      # Last fun thing... here we change the executable from freedoom2 to gzdoom.sh
       - desktop-file-edit --set-key=Exec --set-value=gzdoom.sh io.github.freedoom.Phase2.desktop
       - install -Dm 644 io.github.freedoom.Phase2.desktop -t /app/share/applications
       - install -Dm 644 io.github.freedoom.Phase2.metainfo.xml -t /app/share/appdata
