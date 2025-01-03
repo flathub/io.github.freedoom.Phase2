@@ -1,7 +1,7 @@
 app-id: io.github.freedoom.Phase2
 runtime: org.freedesktop.Platform
 sdk: org.freedesktop.Sdk
-runtime-version: '23.08'
+runtime-version: '24.08'
 command: gzdoom.sh
 
 # Desktop file icons are not named according to standard
@@ -45,8 +45,8 @@ modules:
         url: https://raw.githubusercontent.com/freedoom/freedoom/v0.13.0/dist/io.github.freedoom.Phase2.desktop
         sha256: df32996518eca95873b0bf2b4159c7a4f39a9c50f9d13ba3bdb6d28a37d37fed
       - type: file
-        url: https://raw.githubusercontent.com/freedoom/freedoom/v0.13.0/dist/io.github.freedoom.Phase2.metainfo.xml
-        sha256: e7e7e2ccba3b874581cf9f40dac4be826710ccf6d80b6a8996f16003c093513d
+        url: https://raw.githubusercontent.com/freedoom/freedoom/af839d61b179836de037ec619b43bae7e62d105d/dist/io.github.freedoom.Phase2.metainfo.xml
+        sha256: 55a9fa3f2e1fb98cf1036e0c49fb3881972098ed64eb1eef8a741b13ec884aae
       - type: file
         path: heada1-48x48.png
       - type: file
